@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="app.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h3>Task Manager</h3>
+        <form id="task-form">
+            <p class="err" id="error-message">Please enter a task</p>
+            <label for="task">Task:</label>
+            <div class="task-input-container">
+                <input type="text" id="task" placeholder="Enter task" required>
+                <button type="submit" id="add">Add</button>
+            </div>
+        </form>
+
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Search tasks">
+            <button id="search-btn">Search</button>
+        </div>
+
+        <ul class="tasks-list">
+            <!-- <li class="task-item">
+                <input type="text" value="Sample Task" readonly>
+                <button class="edit">Edit</button>
+                <button class="delete">Delete</button>
+            </li> -->
+        </ul>
+
+        <button id="clear">Clear Tasks</button>
+    </div>
+</body>
+</html>
