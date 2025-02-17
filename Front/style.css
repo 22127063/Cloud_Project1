@@ -30,6 +30,14 @@ h3 {
     margin-bottom: 1.5rem;
 }
 
+/* Error Layout */
+.err {
+    color: red;
+    font-size: 0.9rem;
+    display: none; /* Hide error messages initially */
+    margin-bottom: 0.5rem;
+}
+
 /* Form Layout */
 form {
     width: 100%;

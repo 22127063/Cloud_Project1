@@ -5,9 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const searchInput = document.getElementById("search");
     const searchButton = document.getElementById("search-btn");
     const clearButton = document.getElementById("clear");
-    const errorMessage = document.getElementById("error-message");
-
-    errorMessage.style.display = "none"; // Hide error message initially
 
     // Function to add a new task
     function addTask(event) {
@@ -15,16 +12,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const taskText = taskInput.value.trim();
 
         if (taskText === "") {
-            errorMessage.style.display = "block";
+            alert("Please enter a task"); // Pop-up error message
             return;
         }
-        errorMessage.style.display = "none";
 
         // Create task item
         const taskItem = document.createElement("li");
         taskItem.classList.add("task-item");
 
-        // Task input
+        // Task input field
         const taskInputField = document.createElement("input");
         taskInputField.type = "text";
         taskInputField.value = taskText;
@@ -40,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
         deleteButton.classList.add("delete");
         deleteButton.textContent = "Delete";
 
-        // Append elements in correct order
+        // Append elements
         taskItem.appendChild(taskInputField);
         taskItem.appendChild(editButton);
         taskItem.appendChild(deleteButton);
@@ -61,6 +57,10 @@ document.addEventListener("DOMContentLoaded", () => {
             inputField.focus();
             button.textContent = "Save";
         } else {
+            if (inputField.value.trim() === "") {
+                alert("Task cannot be empty!"); // Pop-up error message
+                return;
+            }
             inputField.readOnly = true;
             button.textContent = "Edit";
         }
@@ -75,16 +75,33 @@ document.addEventListener("DOMContentLoaded", () => {
     function searchTasks() {
         const searchTerm = searchInput.value.toLowerCase();
         const tasks = document.querySelectorAll(".task-item");
+        let found = false;
 
         tasks.forEach(task => {
             const taskText = task.querySelector("input").value.toLowerCase();
-            task.style.display = taskText.includes(searchTerm) ? "flex" : "none";
+            if (taskText.includes(searchTerm)) {
+                task.style.display = "flex";
+                found = true;
+            } else {
+                task.style.display = "none";
+            }
         });
+
+        if (!found) {
+            alert("No matching tasks found!"); // Pop-up error message
+        }
     }
 
     // Function to clear all tasks
     function clearTasks() {
-        taskList.innerHTML = "";
+        if (taskList.children.length === 0) {
+            alert("No tasks to clear!"); // Pop-up error message
+            return;
+        }
+
+        if (confirm("Are you sure you want to clear all tasks?")) {
+            taskList.innerHTML = "";
+        }
     }
 
     // Event listeners
